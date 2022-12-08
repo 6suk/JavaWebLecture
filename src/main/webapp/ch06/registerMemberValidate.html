@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>회원가입</title>
+    <style>
+      * {
+        font-family: -apple-system, BlinkMacSystemFont, 'Apple SD Gothic Neo',
+          'Pretendard Variable', Pretendard, Roboto, 'Noto Sans KR', 'Segoe UI',
+          'Malgun Gothic', 'Apple Color Emoji', 'Segoe UI Emoji',
+          'Segoe UI Symbol', sans-serif;
+        color: #333;
+      }
+      tr,
+      td {
+        padding: 8px;
+        font-size: 16px;
+      }
+      input {
+        font-size: 14px;
+      }
+    </style>
+    <script>
+      function fn_validate() {
+        let formReg = document.formReg;
+        let uid = formReg.uid.value;
+        let pwd = formReg.pwd.value;
+        let pwd2 = formReg.pwd2.value;
+
+        // 검증 : uid length가 4 이상, pwd == pwd2 ==> 전송
+        if (uid.length >= '4' && pwd.length >= 4 && pwd == pwd2) {
+          formReg.method = 'post';
+          formReg.action = '/ch06/register';
+          formReg.submit();
+        } else {
+          alert(
+            '아이디 / 패스워드의 길이는 4이상, 입력한 패스워드가 서로 일치해야 합니다.'
+          );
+        }
+      }
+    </script>
+  </head>
+  <body style="margin: 50px">
+    <h1>회원가입</h1>
+    <hr style="margin-bottom: 20px" />
+    <form name="formReg">
+      <table>
+        <tr>
+          <td>아이디</td>
+          <td>
+            <input
+              type="text"
+              name="uid"
+              placeholder="아이디"
+              maxlength="10"
+              minlength="1"
+              required
+            />
+          </td>
+        </tr>
+        <tr>
+          <td>패스워드</td>
+          <td>
+            <input
+              type="password"
+              name="pwd"
+              placeholder="패스워드"
+              maxlength="10"
+              minlength="1"
+              required
+            />
+          </td>
+        </tr>
+        <tr>
+          <td>패스워드 확인</td>
+          <td>
+            <input
+              type="password"
+              name="pwd2"
+              placeholder="패스워드 확인"
+              maxlength="10"
+              minlength="1"
+              required
+            />
+          </td>
+        </tr>
+        <tr>
+          <td>이름</td>
+          <td>
+            <input
+              type="text"
+              name="name"
+              placeholder="이름"
+              max="6"
+              required
+            />
+          </td>
+        </tr>
+        <tr>
+          <td>생년월일</td>
+          <td>
+            <input type="date" name="bDay" placeholder="생년월일" required />
+          </td>
+        </tr>
+        <tr>
+          <td>이메일</td>
+          <td>
+            <input type="email" name="email" placeholder="이메일" required />
+          </td>
+        </tr>
+        <tr>
+          <td>성별</td>
+          <td>
+            <input type="radio" name="gender" value="남성" checked />남성
+            <input type="radio" name="gender" value="여성" />여성
+          </td>
+        </tr>
+        <tr>
+          <td>취미</td>
+          <td>
+            <input
+              type="checkbox"
+              name="hobby"
+              value="없음"
+              checked
+              style="display: none"
+            />
+            <input type="checkbox" name="hobby" value="놀기" />놀기
+            <input type="checkbox" name="hobby" value="코딩" />코딩
+            <input type="checkbox" name="hobby" value="공부" />공부
+            <input type="checkbox" name="hobby" value="안공부" />안공부
+            <input type="checkbox" name="hobby" value="잠자기" />잠자기
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2">
+            <button
+              style="
+                width: 100%;
+                height: 40px;
+                border: none;
+                background-color: antiquewhite;
+              "
+              onclick="fn_validate()"
+            >
+              회원가입
+            </button>
+          </td>
+        </tr>
+      </table>
+    </form>
+  </body>
+</html>

@@ -82,6 +82,5 @@ public class Params extends HttpServlet {
 		out.print("</ul>");
 		out.print("</body>");
 		out.print("</html>");
-
 	}
 }
