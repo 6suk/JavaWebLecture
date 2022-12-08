@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Form Group</title>
+  </head>
+  <body style="margin: 50px">
+    <form action="/ch06/Params" method="post">
+      UID : <input type="text" name="uid" placeholder="사용자 ID" /><br /><br />
+      PWD :
+      <input type="password" name="pwd" placeholder="패스워드" /><br /><br />
+      SKill : <input type="checkbox" name="skill" value="JSP" />JSP
+      <input type="checkbox" name="skill" value="JAVA" />JAVA
+      <input type="checkbox" name="skill" value="HTML" checked />HTML
+      <input type="checkbox" name="skill" value="CSS" />CSS<br /><br />
+      FOOD : <input type="radio" name="food" value="1" />짜장면
+      <input type="radio" name="food" value="2" />스테이크
+      <input type="radio" name="food" value="3" />라면
+      <input type="radio" name="food" value="4" checked />만두<br /><br />
+      <input type="submit" value="확인" />
+    </form>
+  </body>
+</html>
