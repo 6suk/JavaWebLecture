@@ -1,5 +1,4 @@
 package ch07_02;
-/** 선수 리스트 - home */
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -11,21 +10,16 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/ch07/playerList")
-public class PlayerList extends HttpServlet {
+@WebServlet("/ch07/rejoinPlayerList")
+public class RejoinPlayerList extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private PlayerDAO dao = new PlayerDAO();
-	
+	private static PlayerDAO dao = new PlayerDAO();
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html; charset=utf-8");
 		PrintWriter out = response.getWriter();
-		
-		List <Player> list = dao.getPlayerList();
-		/** Print */
+		List<Player> list = dao.byePlayerList();
 		out.print(html(list));
-		
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -39,7 +33,7 @@ public class PlayerList extends HttpServlet {
 				+ "    <meta charset=\"UTF-8\" />\r\n"
 				+ "    <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\" />\r\n"
 				+ "    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\" />\r\n"
-				+ "    <title>Home</title>\r\n"
+				+ "    <title>방출 선수 리스트</title>\r\n"
 				+ "    <style>\r\n"
 				+ "      * {\r\n"
 				+ "        font-family: -apple-system, BlinkMacSystemFont, 'Apple SD Gothic Neo',\r\n"
@@ -64,6 +58,7 @@ public class PlayerList extends HttpServlet {
 				+ "        align-items: center;\r\n"
 				+ "        padding: 20px;\r\n"
 				+ "        border-bottom: solid 1px #eee;\r\n"
+				+ "        align-items: flex-end;\r\n"
 				+ "      }\r\n"
 				+ "\r\n"
 				+ "      body {\r\n"
@@ -96,7 +91,7 @@ public class PlayerList extends HttpServlet {
 				+ "      input[type='button'] {\r\n"
 				+ "        font-size: 15px;\r\n"
 				+ "        height: 41px;\r\n"
-				+ "        padding-inline: 28px;\r\n"
+				+ "        padding-inline: 32px;\r\n"
 				+ "      }\r\n"
 				+ "      .mainbtn {\r\n"
 				+ "        background-color: #4880ee;\r\n"
@@ -118,23 +113,16 @@ public class PlayerList extends HttpServlet {
 				+ "    <div class=\"contain-01\">\r\n"
 				+ "      <div class=\"contain-02\">\r\n"
 				+ "        <div class=\"title\">\r\n"
-				+ "          <h1>선수 리스트</h1>\r\n"
-				+ "          <div>\r\n"
-				+ "            <input\r\n"
-				+ "              class=\"mainbtn\"\r\n"
-				+ "              type=\"button\"\r\n"
-				+ "              value=\"선수등록\"\r\n"
-				+ "              onclick=\"location.href ='/ch07_02/regPlayer.html'\"\r\n"
-				+ "            />\r\n"
-				+ "            <input\r\n"
-				+ "              class=\"subbtn\"\r\n"
-				+ "              type=\"button\"\r\n"
-				+ "              value=\"선수 재입단\"\r\n"
-				+ "              onclick=\"location.href ='/ch07/rejoinPlayerList'\"\r\n"
-				+ "            />\r\n"
-				+ "          </div>\r\n"
+				+ "          <h1>방출 선수 리스트</h1>\r\n"
+				+ "          <button\r\n"
+				+ "            type=\"button\"\r\n"
+				+ "            class=\"mainbtn\"\r\n"
+				+ "            onclick=\"location.href ='/ch07/playerList'\"\r\n"
+				+ "          >\r\n"
+				+ "            Home\r\n"
+				+ "          </button>\r\n"
 				+ "        </div>\r\n"
-				+ "\r\n"
+				+ "			<form method=\"post\" action=\"/ch07/rejoinPlayer\">"
 				+ "        <table>\r\n"
 				+ "          <tr style=\"background-color: #e8f0fd42\">\r\n"
 				+ "            <th>백넘버</th>\r\n"
@@ -142,43 +130,46 @@ public class PlayerList extends HttpServlet {
 				+ "            <th>포지션</th>\r\n"
 				+ "            <th>생년월일</th>\r\n"
 				+ "            <th>키</th>\r\n"
-				+ "            <th>정보 수정 / 방출</th>\r\n"
+				+ "            <th>재입단</th>\r\n"
 				+ "          </tr>");
-		
 		for(Player x : list)
-			sb.append("<tr>").append("<td>").append(x.getNum()).append("</td>")
-			.append("<td>").append(x.getName()).append("</td>")
-			.append("<td>").append(x.getPosition()).append("</td>")
-			.append("<td>").append(x.getbDay()).append("</td>")
-			.append("<td>").append(x.getHeight()).append("</td>")
+			sb.append("<tr>\r\n"
+					+ "            <td><input type=\"hidden\" name=\"bNum\">")
+			.append(x.getNum())
+			.append("</input></td>\r\n"
+					+ "            <td>")
+			.append(x.getName())
+			.append("</td>\r\n"
+					+ "            <td>")
+			.append(x.getPosition())
+			.append("</td>\r\n"
+					+ "            <td>")
+			.append(x.getbDay())
+			.append("</td>\r\n"
+					+ "            <td>")
+			.append(x.getHeight())
+			.append("</td>")
 			.append("<td>\r\n"
-					+ "              <button\r\n"
-					+ "                class=\"subbtn\"\r\n"
-					+ "                type=\"button\"\r\n"
-					+ "                onclick=\"location.href='/ch07/updatePlayer?bNum=")
+					+ "                <button\r\n"
+					+ "                  class=\"subbtn\"\r\n"
+					+ "                  type=\"button\"\r\n"
+					+ "                  onclick=\"location.href='/ch07/rejoinPlayer?bNum=")
 			.append(x.getNum())
 			.append("'\"\r\n"
-					+ "              >\r\n"
-					+ "                수정\r\n"
-					+ "              </button>\r\n"
-					+ "              <button\r\n"
-					+ "                class=\"subbtn\"\r\n"
-					+ "                type=\"button\"\r\n"
-					+ "                onclick=\"location.href = '/ch07/deletePlayer?bNum=")
-			.append(x.getNum())
-			.append("'\"\r\n"
-					+ "              >\r\n"
-					+ "                방출\r\n"
-					+ "              </button>\r\n"
-					+ "            </td>\r\n"
-					+ "          </tr>");
-		sb.append("        </table>\r\n"
+					+ "                >\r\n"
+					+ "                  재입단\r\n"
+					+ "                </button>\r\n"
+					+ "              </td>\r\n"
+					+ "            </tr>");
+		sb.append("</table></form>\r\n"
 				+ "      </div>\r\n"
 				+ "    </div>\r\n"
 				+ "  </body>\r\n"
 				+ "</html>");
 		
 		return sb;
+		
 	}
+	
 
 }

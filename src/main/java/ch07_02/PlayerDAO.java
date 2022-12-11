@@ -137,7 +137,7 @@ public class PlayerDAO {
 
 	/** 3. 선수 정보 수정 */
 	public void updatePlayer(Player p) {
-		String sql = "UPDATE bplayer SET `name` = ?, `position` = ?, height = ? WHERE number = ?;";
+		String sql = "UPDATE bplayer SET `name` = ?, `position` = ?, height = ?, birthday = ? WHERE number = ?;";
 
 		try {
 			myGetConn();
@@ -145,7 +145,8 @@ public class PlayerDAO {
 			pstmt.setString(1, p.getName());
 			pstmt.setString(2, p.getPosition());
 			pstmt.setInt(3, p.getHeight());
-			pstmt.setInt(4, p.getNum());
+			pstmt.setString(4, p.getbDay().toString());
+			pstmt.setInt(5, p.getNum());
 
 			pstmt.executeUpdate();
 			pstmt.close();
