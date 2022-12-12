@@ -10,8 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/ch07/rejoinPlayerList")
-public class RejoinPlayerList extends HttpServlet {
+@WebServlet("/ch07/tmp_rejoinPlayerList")
+public class Tmp_RejoinPlayerList extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static PlayerDAO dao = new PlayerDAO();
 

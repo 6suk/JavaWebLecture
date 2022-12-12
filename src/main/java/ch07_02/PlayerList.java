@@ -130,7 +130,7 @@ public class PlayerList extends HttpServlet {
 				+ "              class=\"subbtn\"\r\n"
 				+ "              type=\"button\"\r\n"
 				+ "              value=\"선수 재입단\"\r\n"
-				+ "              onclick=\"location.href ='/ch07/rejoinPlayerList'\"\r\n"
+				+ "              onclick=\"location.href ='/ch07/rejoinPlayer'\"\r\n"
 				+ "            />\r\n"
 				+ "          </div>\r\n"
 				+ "        </div>\r\n"
