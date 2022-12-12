@@ -1,4 +1,4 @@
-package ch07_02;
+package baseballPlayer;
 /** 선수 등록 */
 
 import java.io.IOException;

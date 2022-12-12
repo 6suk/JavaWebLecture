@@ -1,4 +1,4 @@
-package ch07_02;
+package baseballPlayer;
 
 import java.time.LocalDate;
 

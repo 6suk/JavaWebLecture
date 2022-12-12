@@ -1,4 +1,4 @@
-package ch07_02;
+package baseballPlayer;
 /** 선수 리스트 - home */
 
 import java.io.IOException;

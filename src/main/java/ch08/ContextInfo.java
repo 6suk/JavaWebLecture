@@ -20,8 +20,9 @@ public class ContextInfo extends HttpServlet {
 		ServletContext sc = request.getServletContext();
 		ServletContext ctx = getServletContext();
 		String menu = ctx.getInitParameter("menu");
-		
 		System.out.println("menu : " + menu);
+		
+		System.out.println(ctx);
 		System.out.println("getMajorVersion : " + ctx.getMajorVersion());
 		System.out.println("getRealPath : " + ctx.getRealPath("/ch08/info"));
 		System.out.println("getServerInfo : " + ctx.getServerInfo());
