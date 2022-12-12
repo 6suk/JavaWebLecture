@@ -1,4 +1,4 @@
-package ch07;
+package ch08.customer;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -9,21 +9,16 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/ch07/updateCustomer")
-public class CustomerUpdate extends HttpServlet {
+
+@WebServlet("/ch08/customer/tmp_updateView")
+public class UpdateView extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private String uid;
-	private String name;
-	private static CustomerDAO dao = new CustomerDAO();
        
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("utf-8");
-		uid = request.getParameter("uid");
-		Customer c = dao.getUserInfo(uid);
-		
-		response.setCharacterEncoding("utf-8");
-		response.setContentType("text/html; charset=utf-8");
+		request.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html; charset=UTF-8");
 		PrintWriter out = response.getWriter();
+		Customer c = (Customer)request.getAttribute("customer");
 		
 		StringBuilder sb = new StringBuilder();
 		sb.append("<!DOCTYPE html>\r\n"
@@ -61,7 +56,7 @@ public class CustomerUpdate extends HttpServlet {
 				+ "  </head>\r\n"
 				+ "  <body style=\"margin-top: 80px\">\r\n"
 				+ "    <h1 style=\"text-align: center\">회원수정</h1>\r\n")
-		.append("    <form method=\"post\" action=\"/ch07/updateCustomer\" enctype=\"UTF-8\">\r\n")
+		.append("    <form method=\"post\" action=\"/ch08/customer/update\">\r\n")
 		.append("<input type=\"hidden\" name=\"uid\" value=\"")
 		.append(c.getUid())
 		.append("\"> <table style=\"margin: 0 auto\">\r\n"
@@ -113,13 +108,7 @@ public class CustomerUpdate extends HttpServlet {
 				+ "");
 		out.print(sb);
 	}
+	
+	
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("utf-8");
-		uid = request.getParameter("uid");
-		name = request.getParameter("name");
-		dao.updateUser2(uid, name);
-		
-		response.sendRedirect("/ch07/customerList");
-	}
 }
