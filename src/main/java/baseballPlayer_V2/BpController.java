@@ -2,7 +2,6 @@ package baseballPlayer_V2;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.Optional;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -108,11 +107,13 @@ public class BpController extends HttpServlet {
 			Player p = new Player(bNum, name, posi, bDay, h);
 			dao.updatePlayer(p);
 			response.sendRedirect(LIST);
+			break;
 
 		case REJOIN:
 			bNum = Integer.parseInt(request.getParameter("bNum"));
 			dao.welcomPlayer(bNum);
 			response.sendRedirect(LIST);
+			break;
 
 		default:
 			System.out.println("잘못된 경로입니다.");
