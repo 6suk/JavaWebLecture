@@ -16,8 +16,8 @@ import javax.servlet.http.HttpSession;
 
 import org.mindrot.jbcrypt.BCrypt;
 
-@WebServlet({ "/ch09/users/list", "/ch09/users/login", "/ch09/users/register", "/ch09/users/logout",
-		"/ch09/users/delete", "/ch09/users/update" })
+//@WebServlet({ "/ch09/users/list", "/ch09/users/login", "/ch09/users/register", "/ch09/users/logout",
+//		"/ch09/users/delete", "/ch09/users/update" })
 public class UsersController extends HttpServlet {
 	private RequestDispatcher rd;
 	private UsersDAO dao = new UsersDAO();
