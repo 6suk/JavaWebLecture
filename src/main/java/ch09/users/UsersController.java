@@ -60,9 +60,9 @@ public class UsersController extends HttpServlet {
 			Uname = (String) ss.getAttribute("uname");
 			u = dao.getUserInfo(uid);
 			out.print(loginMsg(u, check));
-
 			System.out.println("[로그아웃] " + uid + ", " + Uname);
 			ss.invalidate();
+//			response.sendRedirect(LIST);
 			break;
 
 		case REG:
@@ -82,7 +82,8 @@ public class UsersController extends HttpServlet {
 			uid = request.getParameter("uid");
 			u = dao.getUserInfo(uid);
 			dao.delUser(uid);
-			out.print(loginMsg(u, 4));
+			response.sendRedirect(LIST);
+//			out.print(loginMsg(u, 4));
 			break;
 
 		default:
@@ -133,7 +134,6 @@ public class UsersController extends HttpServlet {
 
 		case UPDATE:
 			uid = request.getParameter("uid");
-			System.out.println(uid);
 			pwd = request.getParameter("pwd");
 			Uname = request.getParameter("name");
 
@@ -169,9 +169,8 @@ public class UsersController extends HttpServlet {
 				SetSession(ss, u.getUid(), u.getUname());
 				dao.regUser(u);
 				out.print(loginMsg(u, 0));
-			} else {
-				out.print(loginMsg(u, 5));
-			}
+			} else out.print(loginMsg(u, 5));
+			
 
 			break;
 
@@ -184,7 +183,7 @@ public class UsersController extends HttpServlet {
 	private void SetSession(HttpSession ss, String uid, String uname) {
 		ss.setAttribute("uid", uid);
 		ss.setAttribute("uname", uname);
-		System.out.println("[Session 세팅 완료 : ]" + uid + ", " + uname);
+		System.out.println("[Session 세팅 완료] : " + uid + ", " + uname);
 	}
 
 	private StringBuilder loginMsg(Users u, int check) {

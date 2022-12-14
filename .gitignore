@@ -6,7 +6,7 @@ test.html
 test.me
 test.java
 test/
-
+build/
 
 .metadata/
 bin/
