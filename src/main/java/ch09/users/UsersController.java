@@ -107,20 +107,20 @@ public class UsersController extends HttpServlet {
 			int check;
 
 			switch (sw) {
-			//아이디 일치
+			// 아이디 일치
 			case 0:
 				if (BCrypt.checkpw(pwd, u.getPwd())) {
 					check = 0;
 					/** Session Setting */
-					SetSession(ss,u.getUid(),u.getUname());
+					SetSession(ss, u.getUid(), u.getUname());
 					out.print(loginMsg(u, check));
-				} else {	//패스워드 불일치
+				} else { // 패스워드 불일치
 					check = 2;
 					System.out.println("[패스워드 불일치]");
 					out.print(loginMsg(u, check));
 				}
 				break;
-			//아이디 불일치
+			// 아이디 불일치
 			case 1:
 				check = 1;
 				System.out.println("[아이디 불일치]");
@@ -143,7 +143,7 @@ public class UsersController extends HttpServlet {
 				u = new Users(uid, pwd, Uname);
 
 			/** Session Setting */
-			SetSession(ss,u.getUid(),u.getUname());
+			SetSession(ss, u.getUid(), u.getUname());
 
 			dao.updateUser(u);
 			out.print(loginMsg(u, 6));
@@ -151,23 +151,31 @@ public class UsersController extends HttpServlet {
 
 		case REG:
 			uid = request.getParameter("uid");
-			pwd = request.getParameter("pwd");
+//			pwd = request.getParameter("pwd");
+			String[] pwdBox = request.getParameterValues("pwd");
 			Uname = request.getParameter("name");
 
 			/** 이메일 미기입 시 */
 			emailReg = request.getParameterValues("email");
 			if (!emailReg[1].isEmpty())
-				u = new Users(uid, pwd, Uname, emailReg[1]);
+				u = new Users(uid, pwdBox[0], Uname, emailReg[1]);
 			else
-				u = new Users(uid, pwd, Uname);
+				u = new Users(uid, pwdBox[0], Uname);
+			System.out.println(pwdBox[0]);
+			System.out.println(pwdBox[1]);
 
 			/** 아이디 중복 검사 */
 			if (dao.getUserInfo(uid).getUid() == null) {
-				SetSession(ss, u.getUid(), u.getUname());
-				dao.regUser(u);
-				out.print(loginMsg(u, 0));
-			} else out.print(loginMsg(u, 5));
-			
+				// 패스워드 확인
+				if (!pwdBox[0].equals(pwdBox[1]))
+					out.print(loginMsg(u, 7));
+				else {
+					SetSession(ss, u.getUid(), u.getUname());
+					dao.regUser(u);
+					out.print(loginMsg(u, 0));
+				}
+			} else
+				out.print(loginMsg(u, 5));
 
 			break;
 
@@ -215,6 +223,10 @@ public class UsersController extends HttpServlet {
 			break;
 		case 6:
 			sb.append(u.getUid()).append(" : 정보 수정 완료!").append("')\r\n" + "  location.href = '").append(LIST)
+					.append("';\r\n" + "</script>");
+			break;
+		case 7:
+			sb.append("입력된 패스워드가 다릅니다!").append("')\r\n" + "  location.href = '").append(REG)
 					.append("';\r\n" + "</script>");
 			break;
 		default:

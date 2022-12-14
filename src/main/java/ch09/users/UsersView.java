@@ -34,7 +34,7 @@ public class UsersView extends HttpServlet {
 			break;
 		case UPDATE_VIEW:
 			Users u = (Users) request.getAttribute("user");
-			System.out.println("view"+u.toString());
+			System.out.println("view" + u.toString());
 			out.print(updateHTML(u));
 			break;
 		default:
