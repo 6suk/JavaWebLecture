@@ -38,6 +38,7 @@ public class UsersView extends HttpServlet {
 			out.print(updateHTML(u));
 			break;
 		default:
+			System.out.println("Viewer Get 잘못된 경로");
 			break;
 		}
 	}

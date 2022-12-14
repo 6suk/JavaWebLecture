@@ -60,9 +60,7 @@ public class UsersController extends HttpServlet {
 			Uname = (String) ss.getAttribute("uname");
 			u = dao.getUserInfo(uid);
 			out.print(loginMsg(u, check));
-			System.out.println("[로그아웃] " + uid + ", " + Uname);
 			ss.invalidate();
-//			response.sendRedirect(LIST);
 			break;
 
 		case REG:
@@ -83,10 +81,9 @@ public class UsersController extends HttpServlet {
 			u = dao.getUserInfo(uid);
 			dao.delUser(uid);
 			response.sendRedirect(LIST);
-//			out.print(loginMsg(u, 4));
 			break;
-
 		default:
+			System.out.println("Controlloer Get 잘못된 경로");
 			break;
 		}
 
@@ -175,6 +172,7 @@ public class UsersController extends HttpServlet {
 			break;
 
 		default:
+			System.out.println("Controlloer Post 잘못된 경로");
 			break;
 		}
 
