@@ -9,12 +9,12 @@ import javax.servlet.http.HttpSessionListener;
  *
  */
 //@WebListener
-public class LoginImpl implements HttpSessionListener {
+public class Loginimpl implements HttpSessionListener {
 	String user_id;
 	String user_pw;
 	static int total_user = 0;
 
-	public LoginImpl() {
+	public Loginimpl() {
 		System.out.println("loginImpl Constructor");
 	}
 

@@ -16,8 +16,8 @@ import javax.servlet.http.HttpSession;
 
 import org.mindrot.jbcrypt.BCrypt;
 
-//@WebServlet({ "/ch09/users/list", "/ch09/users/login", "/ch09/users/register", "/ch09/users/logout",
-//		"/ch09/users/delete", "/ch09/users/update" })
+@WebServlet({ "/ch09/users/list", "/ch09/users/login", "/ch09/users/register", "/ch09/users/logout",
+		"/ch09/users/delete", "/ch09/users/update" })
 public class UsersServiceController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private RequestDispatcher rd;
@@ -90,6 +90,7 @@ public class UsersServiceController extends HttpServlet {
 					out.print(loginMsg(u, 5));
 				break;
 			}
+			break;
 
 		case LOGIN:
 			switch (method) {
@@ -148,6 +149,7 @@ public class UsersServiceController extends HttpServlet {
 //				}
 				break;
 			}
+			break;
 
 		case LOGOUT:
 			int check = 3;
@@ -187,7 +189,6 @@ public class UsersServiceController extends HttpServlet {
 				out.print(loginMsg(u, 6));
 				break;
 			}
-
 			break;
 
 		case DEL:
@@ -196,6 +197,7 @@ public class UsersServiceController extends HttpServlet {
 			dao.delUser(uid);
 			response.sendRedirect(LIST);
 			break;
+			
 		default:
 			System.out.println("Controlloer Get 잘못된 경로");
 			break;

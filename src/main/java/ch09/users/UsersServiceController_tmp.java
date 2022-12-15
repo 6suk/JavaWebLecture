@@ -6,6 +6,7 @@ import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
 
+import javax.naming.Context;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,8 +17,8 @@ import javax.servlet.http.HttpSession;
 
 import org.mindrot.jbcrypt.BCrypt;
 
-@WebServlet({ "/ch09/users/list", "/ch09/users/login", "/ch09/users/register", "/ch09/users/logout",
-		"/ch09/users/delete", "/ch09/users/update" })
+//@WebServlet({ "/ch09/users/list", "/ch09/users/login", "/ch09/users/register", "/ch09/users/logout",
+//		"/ch09/users/delete", "/ch09/users/update" })
 public class UsersServiceController_tmp extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private RequestDispatcher rd;
@@ -47,6 +48,7 @@ public class UsersServiceController_tmp extends HttpServlet {
 
 		switch (request.getServletPath()) {
 		case LIST:
+			System.out.println(request.getRequestURL());
 			System.out.println("[LIST Session Value] : " + (String) ss.getAttribute("uid") + ", "
 					+ (String) ss.getAttribute("uname"));
 			System.out.println("[LIST/GETID]" + ss.getId());
@@ -59,11 +61,13 @@ public class UsersServiceController_tmp extends HttpServlet {
 		case REG:
 			switch (method) {
 			case "GET":
+				System.out.println(request.getRequestURL());
 				rd = request.getRequestDispatcher(REG_VIEW);
 				rd.forward(request, response);
 				break;
 
 			case "POST":
+				System.out.println(request.getRequestURL());
 				uid = request.getParameter("uid");
 				String[] pwdBox = request.getParameterValues("pwd");
 				Uname = request.getParameter("name");
@@ -90,15 +94,18 @@ public class UsersServiceController_tmp extends HttpServlet {
 					out.print(loginMsg(u, 5));
 				break;
 			}
+			break;
 
 		case LOGIN:
 			switch (method) {
 			case "GET":
+				System.out.println(request.getRequestURL());
 				rd = request.getRequestDispatcher(LOGIN_VIEW);
 				rd.forward(request, response);
 				break;
 
 			case "POST":
+				System.out.println(request.getRequestURL());
 				uid = request.getParameter("uid");
 				pwd = request.getParameter("pwd");
 				u = dao.getUserInfo(uid);
@@ -148,6 +155,7 @@ public class UsersServiceController_tmp extends HttpServlet {
 //				}
 				break;
 			}
+			break;
 
 		case LOGOUT:
 			int check = 3;
