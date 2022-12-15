@@ -4,7 +4,7 @@
 <html>
   <head>
     <meta charset="UTF-8" />
-    <title>500 에러 처리 페이지</title>
+    <title>Error : 500</title>
   </head>
   <style>
     * {
@@ -25,7 +25,7 @@
     }
   </style>
   <body>
-    <h1>오류가 발생했습니다.</h1><br>
+    <h1>오류가 발생했습니다.</h1>
     <p>불편을 드려 죄송합니다. 잠시 후 다시 시도해 보세요.</p>
   </body>
 </html>

@@ -4,7 +4,7 @@
 <html>
   <head>
     <meta charset="UTF-8" />
-    <title>404 에러 처리 페이지</title>
+    <title>Error : 404</title>
   </head>
   <style>
     * {
