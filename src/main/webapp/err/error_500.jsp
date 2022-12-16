@@ -23,6 +23,9 @@
       flex-direction: column;
       align-items: center;
     }
+    h1{
+    margin-bottom : 0px;
+    }
   </style>
   <body>
     <h1>오류가 발생했습니다.</h1>
